@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+} */
+
+.MainBody{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1000;
+  position: absolute;
+  opacity: 0.7;
+  width: 30%;
+  height: 70%;
+  background-color: #fff;
+  top: 15%;
+  left: 35%;
+  
+}
+::selection{
+  color: #fff;
+  background: #d43f8d;
+}
+.container{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 5px;
+  padding: 50px 35px 10px 35px;
+}
+.container header{
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0 0 30px 0;
+}
+.container .form-outer{
+  width: 100%;
+  margin-top: -1rem;
+  overflow: hidden;
+}
+.container .form-outer form{
+  display: flex;
+  width: 400%;
+}
+
+.form-outer form .page{
+  width: 25%;
+  transition: margin-left 0.3s ease-in-out;
+}
+.form-outer form .page .title{
+  text-align: left;
+  font-size: 25px;
+  font-weight: 500;
+}
+.form-outer form .page .field{
+  width: 100%;
+  height: 45px;
+  margin: 45px 0;
+  display: flex;
+  position: relative;
+}
+form .page .field .label{
+  position: absolute;
+  top: -30px;
+  font-weight: 500;
+}
+form .page .field input{
+  height: 100%;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 15px;
+  font-size: 18px;
+}
+form .page .field select{
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+form .page .field button{
+  width: 100%;
+  height: calc(100% + 5px);
+  border: none;
+  background: #d33f8d;
+  margin-top: -20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.5s ease;
+}
+form .page .field button:hover{
+  background: #000;
+}
+form .page .btns button{
+  margin-top: -20px!important;
+}
+form .page .btns button.prev{
+  margin-right: 3px;
+  font-size: 17px;
+}
+form .page .btns button.next{
+  margin-left: 3px;
+}
+.container .progress-bar{
+  display: flex;
+  margin: 40px 0;
+  user-select: none;
+}
+.container .progress-bar .step{
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+.container .progress-bar .step p{
+  font-weight: 500;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 8px;
+}
+.progress-bar .step .bullet{
+  height: 25px;
+  width: 25px;
+  border: 2px solid #000;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  transition: 0.2s;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 25px;
+}
+.progress-bar .step .bullet.active{
+  border-color: #d43f8d;
+  background: #d43f8d;
+}
+.progress-bar .step .bullet span{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.progress-bar .step .bullet.active span{
+  display: none;
+}
+.progress-bar .step .bullet:before,
+.progress-bar .step .bullet:after{
+  position: absolute;
+  content: '';
+  bottom: 11px;
+  height: 3px;
+  right: -75px;
+  width: 75px;
+  background: #000000;
+}
+.progress-bar .step .bullet.active:after{
+  background: #d43f8d;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 0.3s linear forwards;
+}
+@keyframes animate {
+  100%{
+    transform: scaleX(1);
+  }
+}
+.progress-bar .step:last-child .bullet:before,
+.progress-bar .step:last-child .bullet:after{
+  display: none;
+}
+.progress-bar .step p.active{
+  color: #d43f8d;
+  transition: 0.2s linear;
+}
+.progress-bar .step .check{
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  font-size: 15px;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.progress-bar .step .check.active{
+  display: block;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+/* for all deivce */
+
+@media screen and (max-width: 1424px){
+  .MainBody {
+      margin: 2rem;
+      position: fixed;
+      width: 40%;
+      height: 80%;
+      overflow: hidden;
+      top: 20%;
+      left: 25%;
+  }
+  header{
+    border: none;
+    padding: 1.5rem 0 ;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -89px;
+    width: 89px;
+  }
+  /* .container .form-outer{
+    padding: 0 10%;
+  } */
+}
+
+@media screen and (max-width: 1208px){
+  .MainBody {
+      width: 45%;
+      height: 80%;
+      left: 26%;
+      top: 10%;
+  }
+  header{
+    border: none;
+    padding: 1.5rem 0 ;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -98px;
+    width: 98px;
+  }
+
+  .container .progress-bar{
+    margin: 10% 0;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .MainBody {
+      width: 50%;
+      height: 70%;
+      left: 24%;
+      top: 10%;
+  }
+  header{
+    border: none;
+    padding: 1.5rem 0 ;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -89px;
+    width: 89px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .MainBody{
+    width: 60%;
+    height: 70%;
+    left: 15%;
+  }
+  header{
+    border: none;
+    padding: 1.5rem 0 ;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -75px;
+    width: 75px;
+  }
+  
+}
+
+@media screen and (max-width: 525px) {
+  .MainBody{
+    width: 80%;
+    height: 70%;
+    left: 5%;
+  }
+  header nav{
+    padding: 0 1rem;
+  }
+  header{
+    border: none;
+    padding: 1.5rem 0 ;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -67px;
+    width: 67px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .MainBody{
+    width: 90%;
+    height: 70%;
+    left: -4%;
+  }
+  .container .form-outer {
+    margin-top: -2rem;
+  }
+  header{
+    border: none;
+    padding: 1.5rem 0 ;
+  }
+  .container .progress-bar {
+    margin: 35px 0;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -47px;
+    width: 47px;
+  }
+}
+
+
+@media screen and (max-width: 320px){
+  .MainBody {
+      border-radius: 0%;
+      margin: 0;
+      height: 70%;
+      width: 100%;
+      top: 10;
+      left: 0;
+  }
+  .container {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      padding: 1rem;
+   }
+
+  .container .form-outer {
+    margin-top: -2rem;
+  }
+  header{
+    border: none;
+    padding: .5rem 0 ;
+  }
+  
+  header ul li {
+    margin: 0;
+  }
+  .progress-bar .step .bullet:before,
+  .progress-bar .step .bullet:after{
+    right: -44px;
+    width: 44px;
+  }
+} 
