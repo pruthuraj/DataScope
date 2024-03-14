@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+  <title> 
+  {% block title %}
+    home
+  {% endblock title %}  
+  </title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Kanit&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="/static/css/styleHome.css">
+   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/static/css/_styleHomeParallax.css">
+</head>
+<body >
+  <header>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/home">pruthuparikh@gamil.com</a>
+        </div>
+        <div class="nav">
+            <ul class="nav-links">
+                <li class="center"><a href="#">Mine</a></li>
+                <li class="upward"><a href="#">Compare</a></li>
+                <li class="center"><a href="#">Track</a></li>
+                <li class="forward"><a href="#">Request</a></li>
+            </ul>
+            <div class="menu"><i style="color: #333333;" class="fa-solid fa-bars"></i></div>
+        </div>
+        <a href="#" class="highlight">Log out</a>
+        <div class="dropdown-menu">
+            <ul>
+                <li class="center"><a href="#">Mine</a></li>
+                <li class="upward"><a href="#">Compare</a></li>
+                <li class="center"><a href="#">Track</a></li>
+                <li class="forward"><a href="#">Request</a></li>
+                <li class="froward">pruthuparikh@gmail.com</li>
+                <li><a href="#" class="highlight">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+  </header>
+
+  <canvas class="background"></canvas>
+
+  <nav class="MainBody">
+    {% block body %}
+    
+    
+
+
+
+
+    {% endblock body %}
+  </nav>
+
+
+
+{% block js %}
+{% endblock js %}
+  <script src="/static/js/_home.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+</body>
+</html>
