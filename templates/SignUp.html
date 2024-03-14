@@ -52,7 +52,7 @@
      </div>
   </div>
   <div class="form-outer">
-     <form action="/login" class="from">
+     <form action="/login" class="from" name="signform" >
         <div class="page slide-page">
            <div class="title">
               Basic Info:
@@ -61,16 +61,16 @@
               <div class="label">
                  First Name
               </div>
-              <input type="text">
+              <input type="text" id="fname" name="fname" required>
            </div>
            <div class="field">
               <div class="label">
                  Last Name
               </div>
-              <input type="text">
+              <input type="text" id="lname" name="lname" required>
            </div>
            <div class="field">
-              <button class="firstNext next">Next</button>
+              <button class="firstNext next" type="button">Next</button>
            </div>
         </div>
         <div class="page">
@@ -81,13 +81,13 @@
               <div class="label">
                  Email Address
               </div>
-              <input type="text">
+              <input type="email" id="email" name="email" required>
            </div>
            <div class="field">
               <div class="label">
                  Phone Number
               </div>
-              <input type="Number">
+              <input type="Number" id="num" name="num" minlength="10" maxlength="10" required>
            </div>
            <div class="field btns">
               <button class="prev-1 prev">Previous</button>
@@ -102,16 +102,15 @@
               <div class="label">
                  Date
               </div>
-              <input type="text">
+              <input type="date" id="bdate" name="bdate" required>
            </div>
            <div class="field">
               <div class="label">
                  Gender
               </div>
-              <select>
-                 <option>Male</option>
-                 <option>Female</option>
-                 <option>Other</option>
+              <select  id="gender" name="gender" required>
+                 <option value="male">Male</option>
+                 <option value="female">Female</option>
               </select>
            </div>
            <div class="field btns">
@@ -127,17 +126,17 @@
               <div class="label">
                  Username
               </div>
-              <input type="text">
+              <input type="text" id="usid" name="usid" required>
            </div>
            <div class="field">
               <div class="label">
                  Password
               </div>
-              <input type="password">
+              <input type="password" id="pass" name="pass" required>
            </div>
            <div class="field btns">
               <button class="prev-3 prev">Previous</button>
-              <button class="submit">Submit</button>
+              <button class="submit" type="submit">Submit</button>
            </div>
         </div>
      </form>

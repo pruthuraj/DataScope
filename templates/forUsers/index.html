@@ -1,64 +1,443 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-  <title> 
-  {% block title %}
-    home
-  {% endblock title %}  
-  </title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Kanit&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="/static/css/styleHome.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>home</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700,900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../static/css/styleHome.css">
+  <link rel="stylesheet" href="../../static/css/inputSearch.css">
 </head>
+
 <body>
-  <header>
-    <div class="navbar">
-        <div class="logo">
-            <a href="/home">pruthuparikh@gamil.com</a>
+  <div class="grid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-2">
+          <div class="grid-line"></div>
         </div>
-        <div class="nav">
-            <ul class="nav-links">
-                <li class="center"><a href="#">Mine</a></li>
-                <li class="upward"><a href="#">Compare</a></li>
-                <li class="center"><a href="#">Track</a></li>
-                <li class="forward"><a href="#">Request</a></li>
-            </ul>
-            <div class="menu"><i style="color: #333333;" class="fa-solid fa-bars"></i></div>
+        <div class="col-md-2">
+          <div class="grid-line"></div>
         </div>
-        <a href="#" class="highlight">Log out</a>
-        <div class="dropdown-menu">
-            <ul>
-                <li class="center"><a href="#">Mine</a></li>
-                <li class="upward"><a href="#">Compare</a></li>
-                <li class="center"><a href="#">Track</a></li>
-                <li class="forward"><a href="#">Request</a></li>
-                <li class="froward">pruthuparikh@gmail.com</li>
-                <li><a href="#" class="highlight">Log out</a></li>
-            </ul>
+        <div class="col-md-2">
+          <div class="grid-line"></div>
         </div>
+        <div class="col-md-2">
+          <div class="grid-line"></div>
+        </div>
+        <div class="col-md-2">
+          <div class="grid-line" style="margin-right:-30px;border-right:1px solid #ccc"></div>
+        </div>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <canvas class="background">
+  <!-- <div class="fixed-top rellax" data-rellax-speed="-2" data-rellax-xs-speed="-5" data-rellax-mobile-speed="3"
+        data-rellax-tablet-speed="-8" style="transform: rotate(45deg);">
+    </div> -->
 
-  </canvas>
+  <main class="main">
+    <header>
+      <div class="container">
+        <div class="title">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-6">
+              <h1>Info<span>tm</span></h1>
+            </div>
+            <div class="col-md-4 ">
+              <a href="#">logout</a>
+            </div>
+          </div>
+        </div>
+        <div class="subtitle">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-2">
+              <a class="dam" href="#">
+                <h3>Mine</h3>
+              </a>
+            </div>
+            <div class="col-md-2">
+              <a class="dam" href="#">
+                <h3>Compare</h3>
+              </a>
+            </div>
+            <div class="col-md-2">
+              <a class="dam" href="#">
+                <h3>Track</h3>
+              </a>
+            </div>
+            <div class="col-md-2">
+              <a class="dam" href="#">
+                <h3>Request</h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <nav class="MainBody">
-    {% block body %}
-      
-    {% endblock body %}
-  </nav>
+    <section class="section san-francisco">
+      <div class="absolute">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-11">
+              <h2 class="rellax" data-rellax-speed="-3" data-rellax-xs-speed="-5" data-rellax-mobile-speed="4"
+                data-rellax-tablet-speed="-3">
+                by Om &<br> Pruthu
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute above">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-offset-1 col-md-2">
+              <div class="lg-green rellax" data-rellax-speed="2" data-rellax-xs-speed="1" data-rellax-mobile-speed="2"
+                data-rellax-tablet-speed="2" style="transform: rotate(45deg);">
+              </div>
+              <div class="sm-green rellax" data-rellax-speed="5" data-rellax-xs-speed="3" data-rellax-mobile-speed="4"
+                data-rellax-tablet-speed="5" style="transform: rotate(45deg);">
+              </div>
+            </div>
+
+            <div class="col-md-offset-2 col-md-1">
+              <div class="sm-purple rellax" data-rellax-speed="2" data-rellax-xs-speed="1" data-rellax-mobile-speed="2"
+                data-rellax-tablet-speed="2" style="transform: rotate(45deg);">
+              </div>
+            </div>
+
+            <div class="col-md-offset-3 col-md-1">
+              <div class="xs-green rellax" data-rellax-speed="5" data-rellax-xs-speed="3" data-rellax-mobile-speed="4"
+                data-rellax-tablet-speed="5" style="transform: rotate(45deg);">
+              </div>
+              <div class="md-green rellax" data-rellax-speed="1" data-rellax-xs-speed="1" data-rellax-mobile-speed="2"
+                data-rellax-tablet-speed="2" style="transform: rotate(45deg);">
+              </div>
+            </div>
+
+            <div class="col-md-1">
+              <div class="lg-purple rellax" data-rellax-speed="3" data-rellax-xs-speed="2" data-rellax-mobile-speed="2"
+                data-rellax-tablet-speed="3" style="transform: rotate(45deg);">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-offset-1 col-md-5">
+            <div class="date">
+              Started on—<br>
+              2024<br>
+              for project
+            </div>
+          </div>
+          <div class="col-md-offset-1 col-md-4">
+            <div class="temp">
+              7
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+    <section class="documentation">
+      <div class="container">
+        <section class="row">
+          <div class="col-md-4 sticky">
+            <div class="options" id="optnCard">
+
+              <p class="options-text disabled">Options</p>
+              <a href="#GettingStarted" class="option options-title active">Intro</a>
+              <a class="option options-title" href="#Speed">Data Mine</a>
+              <a class="option options-title" href="#Centering">Comparing</a>
+              <a class="option options-title" href="#ZIndex">Track</a>
+              <a class="option options-title" href="#HorParlx">Request</a>
+              <p class="options-text options-text--margin">future updates</p>
+              <a class="option options-title" href="#Refresh">Discount predict</a>
+              <a class="option options-title" href="#Destroy">Date predict</a>
+
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <!-- Getting Started -->
+            <section class="section" id="GettingStarted">
+              <div style="margin-top: 6rem">
+
+                <div>
+                  <!-- sect1 -->
+                  <h2 class="heading">Welcome to DataScope</h2>
+                  <p style="font-weight: lighter;">
+                    Best place for beginer data scientist <br>
+                    & for a person who is looking for product to compare
+                  </p>
+                  <div class="text-editor">
+                    <code>
+                          Mine Data 
+                          <span class="white">
+                            from amazon.com 
+                          </span><br>
+                          <span class="purple">Compare</span>
+                          <span class="white">
+                            with store
+                          </span><br>
+                          <span class="orange">Track</span>
+                          <span class="white">
+                            the product 
+                          </span><br>
+                          <span class="green">Request</span>
+                          <span class="white">
+                            option in 
+                          </span>
+                          Mine Data
+                        </code>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- Data mining -->
+            <section class="section" id="Speed">
+              <div style="margin-top: 6rem">
+
+                <!-- sect1 -->
+                <h2 class="heading">Data Mine</h2>
+                <p style="font-weight: lighter;">
+                  Data mining is the process of extracting valuable patterns and knowledge
+                  from vast datasets. Utilizing various techniques, such as
+                  <kbd>machine learning</kbd> and <kbd>statistical analysis</kbd>, it uncovers
+                  hidden trends, relationships, and insights. This transformative
+                  discipline empowers <kbd>decision-making</kbd>, enabling businesses
+                  to optimize operations and discover meaningful information
+                  in the ever-expanding sea of data.
+
+                </p>
 
 
 
-{% block js %}
-{% endblock js %}
-  <script src="/static/js/home.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+                <div>
+                  <!-- sect2 -->
+                  <h3 class="heading">Getting Started with it</h3 style="margin-top: 4rem">
+                  <p style="font-weight: lighter;">
+                    get the link from web <kbd>(amazon.com)</kbd> then paste it on the link box.
+                    it will give some optins on what you want to mine like
+
+                  </p>
+
+                  <div class="text-editor">
+                    <code>
+                            Name <br>
+                            Rating <br>
+                            Date <br>
+                            comment <br>
+                        </code>
+                  </div>
+
+                  <p style="font-weight: lighter;">
+                    it will fetch the data with in few seconds.And make it available
+                    in formate of table for view porpuse.<kbd>Note that if you need addtional
+                      fieldset
+                      then you can request those in request section</kbd>.
+                    The data that has be mined can be download in following formate.
+                  </p>
+                  <div class="text-editor">
+                    <code>
+                          dataset<span class="white">.csv </span><br> 
+                          dataset<span class="white">.exel </span> 
+                        </code>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </section>
+
+            <!-- Compare -->
+            <section class="section" id="Centering">
+              <div style="margin-top: 6rem">
+
+                <!-- sect1 -->
+                <h2 class="heading">Compare</h2>
+                <p style="font-weight: lighter;">
+                  Here you can compare the produce with other <kbd>web store</kbd>,here this functionality
+                  is provided to user to get best product from <kbd>best website</kbd>, with reasonable
+                  price and <kbd>best service</kbd>.<br>
+                </p>
+                <div class="text-editor">
+                  <code>
+                    <span class="purple">
+                      enter product name in search box. <br>
+                    </span>
+                    <br>
+                    <div class="Input">
+                      <input type="text" id="input" class="Input-text" placeholder=" e.g. Motorola Pulse 3" disabled>
+                      <label for="input" class="Input-label">Product name</label>
+                    </div>
+                  </code>
+                </div>
+                <br>
+              </div>
+            </section>
+
+            <!-- Track -->
+            <section class="section" id="ZIndex">
+              <div style="margin-top: 6rem">
+
+                <!-- sect1 -->
+                <h2 class="heading">Track</h2>
+                <p style="font-weight: lighter;">
+                  If you want to sort your elements properly in the Z space,
+                  you can use the <br><kbd>data-rellax-zindex</kbd> property.
+                </p>
+                <br>
+
+                <div class="text-editor">
+                  <code>
+                        &lt;div <span class="purple">class</span>="<span class="green">rellax</span>"&gt;<br>
+                        <span class="white">&nbsp;&nbsp;I’m that default chill speed of "-2" and default &nbsp;&nbsp;z-index of 0</span><br>
+                        &lt;/div&gt;
+                        <br />
+                        <br>
+                        &lt;div <span class="purple">class</span>="<span class="green">rellax</span>" <span class="purple">data-rellax-speed</span>="<span class="green">7</span>"
+                        <br>&nbsp;&nbsp;<span class="purple">data-rellax-zindex</span>="<span class="green">5</span>"&gt;<br>
+                        <span class="white">&nbsp;&nbsp;I’m super fast!! And on top of the previous &nbsp;&nbsp;element, I'm z-index 5!!</span><br>
+                        &lt;/div&gt;
+                        <br />
+                      </code>
+                </div>
+              </div>
+            </section>
+
+            <!-- request -->
+            <section class="section" id="HorParlx">
+              <div style="margin-top: 6rem">
+                <!-- sect1 -->
+                <h2 class="heading">Request</h2>
+                <p style="font-weight: lighter;">
+                  Horizontal parallax is disabled by default. You can enable it by passing
+                  <br><kbd><span class="orange">horizontal: true</span></kbd> in the settings
+                  block. This feature is intended for panoramic style websites, where users
+                  scroll horizontally instead of vertically. Note that this can work together
+                  at the same time with the default vertical parallax. If you do not want this,
+                  pass <kbd><span class="orange">vertical: false</span></kbd>.
+                </p>
+                <br>
+
+                <div class="text-editor">
+                  <code>
+                        &lt;script&gt;
+                          <br>&nbsp;&nbsp;<span class="comment">//Enable Horizontal Parallax Scrolling</span>
+                          <br>&nbsp;&nbsp;<span class="purple">var</span> rellax = <span class="green">new</span> <span class="white">Rellax</span>('.rellax',
+                          <span class="white">
+                            {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">horizontal:</span><span class="orange">true</span>
+                              <br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//Disable vertical Parallax Scrolling</span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">vertical:</span><span class="orange">false</span>
+                            <br>&nbsp;&nbsp;}</span>);
+                          <br />
+                        &lt;/script&gt;
+                      </code>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- Refresh -->
+            <section class="section" id="Refresh">
+              <div style="margin-top: 6rem">
+                <!-- sect1 -->
+
+                <h2 class="heading">Discount predict</h2>
+
+                <div class="text-editor">
+                  <code>
+                        &lt;script&gt;
+                          <br>&nbsp;&nbsp;<span class="comment">// Start Rellax</span>
+                          <br>&nbsp;&nbsp;<span class="purple">var</span> rellax = <span class="green">new</span> <span class="white">Rellax</span>('.rellax');
+                          <br />
+                          <br>&nbsp;&nbsp;<span class="comment">// Destroy and create again parallax with previous settings</span>
+                            <br>&nbsp;&nbsp;rellax<span class="orange">.refresh();</span>
+                            <br>
+                        &lt;/script&gt;
+                      </code>
+                </div>
+              </div>
+            </section>
+
+            <!-- Destroy -->
+            <section class="section" id="Destroy">
+              <div style="margin-top: 6rem">
+                <!-- sect1 -->
+                <h2 class="heading">Date predict</h2>
+                <div class="text-editor">
+                  <code>
+                        &lt;script&gt;
+                          <br>&nbsp;&nbsp;<span class="comment">// Start Rellax</span>
+                          <br>&nbsp;&nbsp;<span class="purple">var</span> rellax = <span class="green">new</span> <span class="white">Rellax</span>('.rellax');
+                          <br />
+                          <br>&nbsp;&nbsp;<span class="comment">// End Rellax and reset parallax elements to their original positions</span>
+                            <br>&nbsp;&nbsp;rellax<span class="orange">.refresh();</span>
+                            <br>
+                        &lt;/script&gt;
+                      </code>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="share">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-1 col-md-3">
+            <a class="dam" href="http://dixonandmoe.com/">Dixon &amp; Moe</a>
+          </div>
+          <div class="col-md-offset-3 col-md-2">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://dixonandmoe.com/rellax/">Share
+              <span>➔</span></a>
+          </div>
+          <div class="col-md-offset-0 col-md-2">
+            <a href="https://twitter.com/share?url=http://dixonandmoe.com/rellax/">Tweet <span>➔</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- javascript -->
+  <script type="text/javascript" src="/static/js/rellax.js"></script>
+  <script type="text/javascript" src="/static/js/option.js"></script>
+  <script>
+    var rellax = new Rellax('.rellax', {
+      // center: true
+      callback: function (position) {
+        // callback every position change
+        console.log(position);
+      },
+      breakpoints: [576, 768, 1024]
+    });
+  </script>
+
 </body>
+
 </html>

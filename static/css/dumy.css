@@ -280,7 +280,7 @@ form .page .btns button.next{
 @media screen and (max-width: 768px) {
   .MainBody{
     width: 60%;
-    height: 70%;
+    height: 80%;
     left: 15%;
   }
   header{
