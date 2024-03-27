@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../static/css/styleHome.css">
   <link rel="stylesheet" href="../../static/css/inputSearch.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -46,7 +47,7 @@
         <div class="title">
           <div class="row">
             <div class="col-md-offset-1 col-md-6">
-              <h1>Info<span>tm</span></h1>
+              <h1>Info</h1>
             </div>
             <div class="col-md-4 ">
               <a href="#">logout</a>
@@ -56,7 +57,7 @@
         <div class="subtitle">
           <div class="row">
             <div class="col-md-offset-1 col-md-2">
-              <a class="dam" href="#">
+              <a class="dam" href="mine">
                 <h3>Mine</h3>
               </a>
             </div>
@@ -87,7 +88,9 @@
             <div class="col-md-offset-1 col-md-11">
               <h2 class="rellax" data-rellax-speed="-3" data-rellax-xs-speed="-5" data-rellax-mobile-speed="4"
                 data-rellax-tablet-speed="-3">
-                by Om &<br> Pruthu
+                {% if username %}
+                {{username}}
+                {% endif%}
               </h2>
             </div>
           </div>
@@ -234,18 +237,18 @@
                   <!-- sect2 -->
                   <h3 class="heading">Getting Started with it</h3 style="margin-top: 4rem">
                   <p style="font-weight: lighter;">
-                    get the link from web <kbd>(amazon.com)</kbd> then paste it on the link box.
+                    get the product id from link from web <kbd>(amazon.com)</kbd> then paste it on the link box.
                     it will give some optins on what you want to mine like
 
                   </p>
 
                   <div class="text-editor">
                     <code>
-                            Name <br>
-                            Rating <br>
-                            Date <br>
-                            comment <br>
-                        </code>
+                      Name <br>
+                      Rating <br>
+                      Date <br>
+                      comment <br>
+                    </code>
                   </div>
 
                   <p style="font-weight: lighter;">

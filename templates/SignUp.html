@@ -52,7 +52,8 @@
      </div>
   </div>
   <div class="form-outer">
-     <form action="/login" class="from" name="signform" >
+     <form action="{% url 'createuser' %}" method="post" class="from" name="signform" autocomplete="on">
+      {% csrf_token %}
         <div class="page slide-page">
            <div class="title">
               Basic Info:
