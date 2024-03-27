@@ -1,30 +1,40 @@
+var particles = null;
+var datatable = document.getElementById("data");
+var colorOnMouseEnter = ["#F7EEDD","#ACE2E1","#41C9E2","#008DDA"];
+var colorOnMouseLeave = ['#333333','#76ABAE','#3f3f3f','#f3f3f3'];
+var ParticlesColor = colorOnMouseLeave;
+var hint = document.getElementById("hint");
+var help = document.getElementById("help");
 
 
+window.onload = function(){
 
+    hint.style.display = "none";
+    help.style.display = "none";
+    datatable.style.display = "none";
 
-window.onload = function () {
-    Particles.init({
-        
+    particles = Particles.init({
     // normal options
     selector: '.background',
-    maxParticles:200,
+    maxParticles:250,
     speed:0.7,
-    color:'#333333',
+    color:ParticlesColor,
     sizeVariations: 3, 
     connectParticles:true,
     // options for breakpoints
     responsive: [{
             breakpoint:768,
             options: {
-                maxParticles:200,
-                color:'#48F2E3',
-                connectParticles:false
+                maxParticles:150,
+                color:['#48F2E3','#76ABAE','#3f3f3f','#f3f3f3'],
+                connectParticles:true
             }
         }, 
         {
             breakpoint:425,
             options: {
-                maxParticles:100,
+                color: '#48F2E3',
+                maxParticles:50,
                 connectParticles:true
             }
         }, 
@@ -39,23 +49,48 @@ window.onload = function () {
     });
 };
 
-const toggleBtn = document.querySelector('.menu');
-const toggleBtnIcon = toggleBtn.querySelector('i');
-const dropDownMenu = document.querySelector('.dropdown-menu');
-
-toggleBtn.onclick = function () {
-    dropDownMenu.classList.toggle('open');
-    const isOpen = dropDownMenu.classList.contains('open');
-    toggleBtnIcon.classList.toggle('fa-bars', !isOpen);
-    toggleBtnIcon.classList.toggle('fa-xmark', isOpen);
-};
-
-
-
 function pause() {
-    particles.pauseAnimation();
+  particles.pauseAnimation();
 }
 
-function resume() {
-    particles.resumeAnimation();
+function resume(){
+  particles.resumeAnimation();
 }
+
+var brake = document.getElementById("basic-url")
+brake.addEventListener("focusin",e =>{
+    pause();
+})
+brake.addEventListener("focusout",e =>{
+    hint.style.display = "none";
+    help.style.display = "none";
+    resume();
+})
+brake.addEventListener("mouseenter",e =>{
+
+    if(brake.value == '' || brake.value == null){
+        hint.style.display = "contents";
+        help.style.display = "contents";
+        return
+    }
+
+    pause();
+})
+brake.addEventListener("mouseleave",e =>{
+    resume();
+})
+
+
+var mineBtn = document.getElementById("mineBtn");
+var datatable = document.getElementById("data");
+mineBtn.addEventListener("click",e =>{
+    if(brake.value == '' || brake.value == null){
+        hint.style.display = "none";
+        alert("url not found")
+        return
+    }
+    datatable.style.display = "contents";
+})
+
+
+
