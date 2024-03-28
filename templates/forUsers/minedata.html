@@ -63,17 +63,17 @@
               </a>
             </div>
             <div class="col-md-2">
-              <a class="dam" href="#">
+              <a class="dam" href="{% url 'compare' %}">
                 <h3>Compare</h3>
               </a>
             </div>
             <div class="col-md-2">
-              <a class="dam" href="#">
+              <a class="dam" href="{% url 'track' %}">
                 <h3>Track</h3>
               </a>
             </div>
             <div class="col-md-2">
-              <a class="dam" href="#">
+              <a class="dam" href="{% url 'request' %}">
                 <h3>Request</h3>
               </a>
             </div>
@@ -91,7 +91,7 @@
       <section class="search">
         <div class="container">
           <div class="row">
-            <form action="{% url 'btnmine'%}?username={{username}}" method="post">
+            <form action="{% url 'btnmine'%}" method="post">
               {% csrf_token %}
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -148,7 +148,7 @@
   <script src="/static/js/jquery-1.11.0.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
 
-  <!-- <script src="/static/js/_home.js"></script> -->
+  <script src="/static/js/auth/checkauth.js"></script>
   <script src="/static/js/user/getData.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 
