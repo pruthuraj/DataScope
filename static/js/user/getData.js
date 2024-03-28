@@ -5,14 +5,15 @@ var colorOnMouseLeave = ['#333333','#76ABAE','#3f3f3f','#f3f3f3'];
 var ParticlesColor = colorOnMouseLeave;
 var hint = document.getElementById("hint");
 var help = document.getElementById("help");
-var brake = document.getElementById("basic-url")
+
+
+
 
 window.onload = function(){
 
-    mineBtn.disabled = true;
-    hint.style.display = "none";
+    // hint.style.display = "none";
     help.style.display = "none";
-    datatable.style.display = "none";
+    // datatable.style.display = "none";
 
     particles = Particles.init({
     // normal options
@@ -48,7 +49,6 @@ window.onload = function(){
         }
     ]
     });
-    pause()
 };
 
 function pause() {
@@ -59,20 +59,25 @@ function resume(){
   particles.resumeAnimation();
 }
 
-
+var brake = document.getElementById("basic-url")
 brake.addEventListener("focusin",e =>{
+    pause();
 })
 brake.addEventListener("focusout",e =>{
-    hint.style.display = "none";
-    help.style.display = "none";
+    resume();
 })
 brake.addEventListener("mouseenter",e =>{
 
     if(brake.value == '' || brake.value == null){
-        hint.style.display = "contents";
+        
         help.style.display = "contents";
         return
     }
+
+    pause();
+})
+brake.addEventListener("mouseleave",e =>{
+    resume();
 })
 
 
@@ -81,19 +86,11 @@ var datatable = document.getElementById("data");
 mineBtn.addEventListener("click",e =>{
     if(brake.value == '' || brake.value == null){
         hint.style.display = "none";
-        alert("id not found")
+        alert("url not found")
         return
     }
     datatable.style.display = "contents";
-    // mineBtn.disabled = true;
-    resume()
 })
 
-brake.addEventListener('input',e=>{
-    if (brake.value.length < 10){
-        mineBtn.disabled = true;
-        return
-    }
-    mineBtn.disabled = false;
-})
+
 

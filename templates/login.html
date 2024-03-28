@@ -14,7 +14,7 @@
 {% block body %}
 <div class="container">
 	<div class="login-content">
-		<form action="/home" >
+		<form action="/home" method="get">
 			<img src="/static/img/avatar.svg">
 			<h2 class="title">Welcome</h2>
 			   <div class="input-div one">
@@ -23,7 +23,11 @@
 				  </div>
 				  <div class="div">
 						  <h5>Username</h5>
-						  <input type="text" class="input" required>
+						  <input type="text" class="input" name="username" id="username" required
+						  {% if password %}
+							value='{{username}}'
+							{% endif %}
+						  >
 				  </div>
 			   </div>
 			   <div class="input-div pass">
@@ -32,8 +36,17 @@
 				  </div>
 				  <div class="div">
 					   <h5>Password</h5>
-					   <input type="password" class="input" required>
+					   <input type="password" class="input" name="password" id="password" required
+					 	{% if password %}
+						value='{{password}}'
+						{% endif %}
+					   >
 			   </div>
+			</div>
+			<div class="text-danger">
+				{% if error_message %}
+					{{error_message}}
+				{% endif %}
 			</div>
 			<a href="#">Forgot Password?</a>
 			<a href="/signup">No account Yet?</a>
