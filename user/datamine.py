@@ -26,8 +26,11 @@ def min_length_of_lists(list1, list2, list3, list4):
 #----------------------------------------------------------------
 
 def mineUserProduct(product_id):
-    pageLimit = 15
-     
+    pageLimit = 25
+    names_list = []
+    review_titles_list = []
+    date_reviews_list = []
+    star_ratings_list = []
     product_url = f'https://www.amazon.in/dp/{product_id}'
     url = f'https://www.amazon.in/product-reviews/{product_id}/pageNumber='
     page_num = 1
@@ -47,6 +50,7 @@ def mineUserProduct(product_id):
             page = requests.get(url + str(page_num), headers=headers)
 
             if page.status_code == 404:
+                print("Page not found.")
                 return "Page not found."
                 
             
@@ -58,16 +62,10 @@ def mineUserProduct(product_id):
         print(url + str(page_num))
         soup = bs(page.content, 'html.parser')
 
-        names_list = [name.get_text() for name in soup.find_all('span', class_='a-profile-name')[2:]]
-        
-        #          if names_list is false then it means that is it the 
-        #          page is not found In Python,( an empty list evaluates to False )
-        if not names_list:
-            break
-
-        review_titles_list = [title.get_text()[19:-1] for title in soup.find_all('a', class_='review-title')]
-        date_reviews_list = [date.get_text() for date in soup.find_all('span', class_='review-date')]
-        star_ratings_list = [star.get_text().replace(' out of 5 stars', '') for star in soup.find_all('span', class_='a-icon-alt')]
+        names_list += [name.get_text() for name in soup.find_all('span', class_='a-profile-name')[2:]]
+        review_titles_list += [title.get_text()[19:-1] for title in soup.find_all('a', class_='review-title')]
+        date_reviews_list += [date.get_text() for date in soup.find_all('span', class_='review-date')]
+        star_ratings_list += [star.get_text().replace(' out of 5 stars', '') for star in soup.find_all('span', class_='a-icon-alt')]
 
         #--------------------------------
         #----      code to check min length of list 
@@ -88,9 +86,9 @@ def mineUserProduct(product_id):
         #----------------------------------------------------------------
 
         temp_df = pd.DataFrame({
-            'Customer Names': names_list[:min_len],
-            'Review Title': review_titles_list[:min_len],
-            'Review Date': date_reviews_list[:min_len],
+            'Names': names_list[:min_len],
+            'Review': review_titles_list[:min_len],
+            'Date': date_reviews_list[:min_len],
             'Rating': star_ratings_list[:min_len]
         })
 
@@ -100,13 +98,19 @@ def mineUserProduct(product_id):
             break
         
     directory = 'files'  # Change this to your desired directory path
-
-# Create the directory if it doesn't exist
-    os.makedirs(directory, exist_ok=True)
-
-    # Save DataFrame to a CSV file inside the directory
+    file_path = 'files/data.csv'
+    # Create the directory if it doesn't exist
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        print("File deleted.")
+    else:
+        print("File does not exist.")
+    print(len(df))
+    df = df.drop_duplicates()
+    print(len(df))
     df.to_csv(os.path.join(directory, 'data.csv'), index=False)
-    df.to_excel(os.path.join(directory, 'data.csv'), index=False)
+    df.to_excel(os.path.join(directory, 'data.xlsx'), index=False)
     print("successfull mining ")
-    return 
+    return df
 
+# mineUserProduct('B0751LPBL8')

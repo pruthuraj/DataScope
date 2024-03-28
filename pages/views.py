@@ -37,6 +37,12 @@ def createUser(request):
     
     print(data)
     
+    query = {"username": userData.get('usid')}
+    user_exists = collection.find_one(query) is not None
+    
+    if user_exists:
+        return HttpResponse("user already exit")
+    
     # Insert data into collection
     result = collection.insert_one(data)
     # Check if insertion was successful
@@ -47,7 +53,7 @@ def createUser(request):
             'password':userData.get('pass')
             })
     else:
-        return HttpResponse({"message": "Failed to insert data."})
+        return HttpResponse("Failed to insert data.")
 
 
 

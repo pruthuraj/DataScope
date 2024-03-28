@@ -52,7 +52,7 @@
      </div>
   </div>
   <div class="form-outer">
-     <form action="{% url 'createuser' %}" method="post" class="from" name="signform" autocomplete="on">
+     <form action="{% url 'createuser' %}" method="post" class="from" name="signform" autocomplete="off" >
       {% csrf_token %}
         <div class="page slide-page">
            <div class="title">
@@ -135,6 +135,8 @@
               </div>
               <input type="password" id="pass" name="pass" required>
            </div>
+           
+
            <div class="field btns">
               <button class="prev-3 prev">Previous</button>
               <button class="submit" type="submit">Submit</button>

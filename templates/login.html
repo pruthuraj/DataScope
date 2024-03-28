@@ -43,6 +43,11 @@
 					   >
 			   </div>
 			</div>
+			<div class="text-danger">
+				{% if error_message %}
+					{{error_message}}
+				{% endif %}
+			</div>
 			<a href="#">Forgot Password?</a>
 			<a href="/signup">No account Yet?</a>
 			<button type="submit" class="btn">Login</button>
