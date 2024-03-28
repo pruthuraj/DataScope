@@ -15,6 +15,7 @@ def home(request):
         
         username = request.GET.get('username')
         password = request.GET.get('password')
+
         
         
         query = {"username": username}
@@ -100,3 +101,17 @@ def downloadfile(request, file):
     response['Content-Length'] = os.path.getsize(thefile)
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response   
+
+
+def compare(request):
+    return render(request,'forUsers/compare.html')
+
+def track(request):
+    return render(request,'forUsers/track.html')
+
+def createTrack(request):
+    return render(request,'forUsers/createTrack.html')
+
+def request(request):
+    return render(request,'forUsers/request.html')
+
