@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.text-danger{
+    color: red;
+}
+
 .MainBody {
     margin: 2rem;
     border-radius: 10%;

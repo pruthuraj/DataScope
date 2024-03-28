@@ -57,7 +57,7 @@
         <div class="subtitle">
           <div class="row">
             <div class="col-md-offset-1 col-md-2">
-              <a class="dam" href="mine">
+              <a class="dam" href="{% url 'mine' %}?username={{username}}">
                 <h3>Mine</h3>
               </a>
             </div>
@@ -408,22 +408,6 @@
       </div>
     </section>
 
-    <section class="share">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-offset-1 col-md-3">
-            <a class="dam" href="http://dixonandmoe.com/">Dixon &amp; Moe</a>
-          </div>
-          <div class="col-md-offset-3 col-md-2">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=http://dixonandmoe.com/rellax/">Share
-              <span>➔</span></a>
-          </div>
-          <div class="col-md-offset-0 col-md-2">
-            <a href="https://twitter.com/share?url=http://dixonandmoe.com/rellax/">Tweet <span>➔</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
 
   </main>
 
@@ -440,6 +424,8 @@
       breakpoints: [576, 768, 1024]
     });
   </script>
+
+  
 
 </body>
 

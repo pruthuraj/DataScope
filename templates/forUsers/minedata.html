@@ -97,56 +97,59 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon3">product id</span>
                 </div>
-                <input type="text" class="form-control bg-dark text-white" name="product_id" id="basic-url" 
-                 minlength="10" maxlength="10"
-                 {% if pid %}
-                 value={{pid}}
-                 {% endif %}
-                 >
-                  
+                <input type="text" class="form-control bg-dark text-white" name="product_id" id="basic-url" minlength="10" maxlength="10"
+                value="{{product_id}}"
+                >
+              
                 <button class="btn btn-outline-secondary text-dark" type="submit" id="mineBtn">Mine</button>
                 
               </div>
             </form>
           </div>
-          <div class="row" id="hint">
-            <div class="text-editor">
-              <code style="background-color: none;">
-                <span class="white">example on how to get id </span>
-                <br>
-                <span class="white">here is the link the highlighted one is </span>
-                <span class="orange">product id</span>
-                <br>
-                https://www.amazon.in/dp/<span class="orange">B0CHM729GT</span>/ref=
-                sspa_dk_detail_3?pd_rd_i=B0CHM729GT&pd_rd_w=
-                rxnzG&content-id=amzn1.sym.cfb442af-d763-47b6-9176-863585ada839&
-                pf_rd_p=cfb442af-d763-47b6-9176-863585ada839&pf_rd_r=PRH20W7QT4RHTVGW1NGW&
-                pd_rd_wg=6CTLy&pd_rd_r=22793b98-e86c-45b1-8041-2bb84a5efd16&sp_csd=
-                d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&th=1 <br>
-                <span class="white">next enter it in the mine field </span>
-              </code>
-            </div>
-          </div>
+          
         </div>
       </section>
 
       <section id="data"> 
         <div class="container">
-          {% if error %}
-            {{error}}
-          {% else %}
-            Loading the Data...
-          {% endif %}
-          
+          <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">star</th>
+                <th scope="col">Comment</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>  <!-- 1-indexed -->
+                        <td>{{ row.Names }}</td>
+                        <td>{{ row.Date }}</td>
+                        <td>{{ row.Rating }}</td>
+                        <td>{{ row.Review }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="download container text-center">
+          <label for="fileformat" class="text-dark">file format</label> <br>
+          <a type="button" class="btn btn-success m-2 " href="{% url 'downloadbtn' file='data.csv' %}" download>Download csv</a>
+          <a type="button" class="btn btn-success m-2 " href="{% url 'downloadbtn' file='data.xlsx' %}" download>Download xlsx</a>
         </div>
       </section>
     </div>
+
   </main>
   <script src="/static/js/jquery-1.11.0.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
 
-  <script src="/static/js/_home.js"></script>
-  <!-- <script src="/static/js/user/getData.js"></script> -->
+  <!-- <script src="/static/js/_home.js"></script> -->
+  <script src="/static/js/user/getData.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 
 </body>
