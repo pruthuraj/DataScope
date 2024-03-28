@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {% block title %}
+      compare
+    {% endblock title %}
+  </title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Kanit&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" href="/static/css/font-awesome.css">
+  <link rel="stylesheet" href="/static/css/user/compare.css">
+  {% block css %}
+    
+  {% endblock css %}
+</head>
+
+<body>
+  <div class="grid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-2">
+          <div class="grid-line"></div>
+        </div>
+        <div class="col-md-2">
+          <div class="grid-line"></div>
+        </div>
+        <div class="col-md-2">
+          <div class="grid-line"></div>
+        </div>
+        <div class="col-md-2">
+          <div class="grid-line"></div>
+        </div>
+        <div class="col-md-2">
+          <div class="grid-line" style="margin-right:-30px;border-right:1px solid #ccc"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div id="background"></div> -->
+  <canvas class="background" id="background"></canvas>
+
+  <main class="main">
+    <header>
+      <div class="container">
+        <div class="title">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-6">
+              <h1 id="back">Scope</h1>
+            </div>
+          </div>
+        </div>
+        <div class="subtitle">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-2">
+              <a class="dam" href="{% url 'mine' %}" >
+                <h3>Mine</h3>
+              </a>
+            </div>
+            <div class="col-md-2">
+              <a class="dam" href="{% url 'compare' %}">
+                <h3>Compare</h3>
+              </a>
+            </div>
+            <div class="col-md-2">
+              <a class="dam" href="{% url 'track' %}">
+                <h3>Track</h3>
+              </a>
+            </div>
+            <div class="col-md-2">
+              <a class="dam" href="{% url 'request' %}">
+                <h3>Request</h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mt-5">
+      <div class="row">
+        <form action="{% url 'comparep'%}" method="get">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">product name</span>
+            </div>
+            <input type="text" class="form-control bg-dark text-white" name="product" id="basic-url" 
+             {% if title %}
+             value={{title}}
+             {% endif %}
+             >
+              
+            <button class="btn btn-outline-secondary text-dark" type="submit" id="comparebtn">
+              compare
+            </button>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      {% block body %}
+        <h1 id="bo" class="text-center" style="display: none;">looding...</h1>
+      {% endblock body %}
+    </div>
+
+
+
+  </main>
+  <script src="/static/js/auth/checkauth.js"></script>
+  <script src="/static/js/jquery-1.11.0.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+
+  <script src="/static/js/user/compare.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+
+</body>
+
+</html>

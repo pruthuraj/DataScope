@@ -1,16 +1,18 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from .datamine import mineUserProduct 
+from .compare import getProduct
 from pymongo import MongoClient
 import pandas as df
 
 
 client = MongoClient('mongodb+srv://pruthu:pruthurajdata@atlascluster.ppge8u6.mongodb.net/')
 db = client['UserDatabase']
-collection = db['user']
 
 # Create your views here.
 def home(request):
+    collection = db['user']
+    
     if request.method == 'GET':
         
         username = request.GET.get('username')
@@ -44,22 +46,19 @@ def home(request):
 def mine(request):
     print("-------------------------mine")
     print(request.method)
-    user = request.GET.get('username')
-    print(user)
     print("-------------------------mineover")
-    if user is None:
-        return redirect('/login', {'error_message': 'login is for it'})
-    return render(request,'forUsers/mine.html',{'username':user})
+    
+    return render(request,'forUsers/mine.html')
 
 
 
 def mindata(request):
     print(request.method)
-    user =  ''
+    product_id=''
     if request.method == 'POST':
-        print(request.method)  # This prints the request method (e.g., 'POST')
-        user = request.POST.get('username')
-        product_id = request.POST.get("product_id")  # Use request.POST.get to safely retrieve values
+        print(request.method) 
+        
+        product_id = request.POST.get("product_id")
 
         print(product_id)
         df = mineUserProduct(product_id).drop_duplicates()
@@ -67,12 +66,12 @@ def mindata(request):
         #if no such id found
         if type(df) == str:
             print(df)
-            return redirect('mine',{'username':user,'pid':product_id,'error':f"no such {product_id} found"})
+            return redirect('mine',{'username':product_id,'error':f"no such {product_id} found"})
         else:            
-            return render(request, 'forUsers/minedata.html', {'data': df.to_dict('records'),'username':user})
+            return render(request, 'forUsers/minedata.html', {'data': df.to_dict('records')})
     else:
         # Handle other request methods like GET
-        return redirect('mine',{'username':user,'pid':product_id,'error':f"no such {product_id} found"})
+        return render(request,'forUsers/mine.html',{'pid':product_id,'error':f"no such {product_id} found"})
 
     
 
@@ -100,3 +99,50 @@ def downloadfile(request, file):
     response['Content-Length'] = os.path.getsize(thefile)
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response   
+
+
+
+def compare(request):
+    return render(request,'forUsers/compare.html')
+
+def forUsersCompare(request):
+    print('----------------------------------compare')
+    print(request.method)
+    product=''
+    if request.method == 'GET':
+        print(request.method) 
+        
+        product = request.GET.get("product")
+
+        print(product)
+        df = getProduct(product)
+    print('-------------------------------------------------')
+    return render(request,'forUsers/compareProduct.html',{'data': df.to_dict('records'),'title':product})
+
+def createTrack(request):
+    return render(request,'forUsers/createTrack.html')
+
+def track(request):
+    return render(request,'forUsers/track.html')
+
+def request(request):
+    collection = db['quests']
+    if request.method == 'POST':
+        userData = request.POST.dict()
+        
+        print(userData.get('userid'))
+        data = {
+        "username": userData.get('userid'),
+        "mailId": userData.get('useremail'),
+        "type":userData.get("retype"),
+        "titel": userData.get('titelre'),
+        "comment": userData.get('recomment')
+        }
+        
+        print(data)
+        result = collection.insert_one(data)
+        if result.inserted_id:
+            print("data inserted successfully")
+            return render(request,'forUsers/request.html',{'re':'sucess'})
+    else:
+        return render(request,'forUsers/request.html')

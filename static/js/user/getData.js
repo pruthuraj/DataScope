@@ -11,6 +11,15 @@ var help = document.getElementById("help");
 
 window.onload = function(){
 
+    var retrievedData = localStorage.getItem('user');
+    var retrievedPassword = localStorage.getItem('password');
+    if ( retrievedData == null || retrievedData == 'null' || retrievedData == '') {
+        window.location.href = 'login/';
+    }else{
+        istheredata = true;
+    }
+    console.log(retrievedData,retrievedData);
+
     // hint.style.display = "none";
     help.style.display = "none";
     // datatable.style.display = "none";

@@ -1,0 +1,22 @@
+{% extends 'forUsers/compare.html' %}
+{% load static %}
+
+{% block title %}
+  Compare {{title}}
+{% endblock title %}
+
+
+{% block body %}
+  <div class="row">
+    {% for row in data %}
+    <div class="card p-2 m-1" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{row.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{row.sites}}</h6>
+        <p class="card-text">{{row.price}}</p>
+        <a href="{{row.link}}" class="btn btn-primary">Card link</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock body %}
