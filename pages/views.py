@@ -16,6 +16,7 @@ def signup(request):
 def login(request):
     return render(request,'login.html')
 
+
 @csrf_protect
 def createUser(request):
     print(request.method)
@@ -29,8 +30,9 @@ def createUser(request):
         "first name": userData.get('fname'),
         "last name": userData.get('lname'),
         "email": userData.get('email'),
-        "number": userData.get('num'),
-        "DOB": userData.get('gender'),
+        "number": int(userData.get('num')),
+        "gender": userData.get('gender'),
+        "DOB": userData.get('bdate'),
         "username": userData.get('usid'),
         "password": userData.get('pass')
     }

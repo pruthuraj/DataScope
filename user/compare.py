@@ -61,3 +61,40 @@ def getProduct(product):
     
     return df
 
+def properCompare(product):
+    product = product.replace(' ','+')
+    url = 'https://www.google.com/search?sca_esv=88f53b0a7b860e25&hl=en&tbm=shop&sxsrf=1&q='
+    url =url + product
+    
+    page = None
+    while page is None or page.status_code != 200:
+        page = requests.get(url , headers=header)
+        if page.status_code == 404:
+            print("Page not found.")
+            return "Page not found."
+    soup = bs(page.content,'html.parser')
+    
+    site = []
+    price = []
+    name = []
+    image = []
+    link = []
+    
+    for card in soup.find_all('div', class_='sh-dgr__content'):
+        price.append(card.find('span',class_='OFFNJ').text)  
+        link.append(card.find('a',class_='xCpuod')['href'])
+        name.append(card.find('h3',class_='tAxDx').text)
+        site.append(card.find('div',class_='aULzUe').text)
+        image.append(card.find('div',class_='ArOc1c').find('img')['src'])
+
+    links = [href_value.replace('/url?url=', '') for href_value in link]
+    
+    df = pd.DataFrame({
+        'name': name,
+        'sites': site,
+        'price': price,
+        'link': links,
+        'img': image
+    })
+    return df
+
