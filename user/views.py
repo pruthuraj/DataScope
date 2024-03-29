@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from .datamine import mineUserProduct 
-from .compare import getProduct
+from .compare import properCompare
 from pymongo import MongoClient
 import pandas as df
 
@@ -18,6 +18,11 @@ def home(request):
         username = request.GET.get('username')
         password = request.GET.get('password')
         
+        print(username, password)
+        
+        if username is None and password is None:
+            return render(request, 'login.html', {'error_message': 'please login first'})
+            
         
         query = {"username": username}
         user_exists = collection.find_one(query) is not None
@@ -59,7 +64,7 @@ def mindata(request):
         print(request.method) 
         
         product_id = request.POST.get("product_id")
-
+        product_id = product_id.split("/dp/")[-1].split("/")[0]
         print(product_id)
         df = mineUserProduct(product_id).drop_duplicates()
         
@@ -115,7 +120,7 @@ def forUsersCompare(request):
         product = request.GET.get("product")
 
         print(product)
-        df = getProduct(product)
+        df = properCompare(product)
     print('-------------------------------------------------')
     return render(request,'forUsers/compareProduct.html',{'data': df.to_dict('records'),'title':product})
 
@@ -125,6 +130,10 @@ def createTrack(request):
 def track(request):
     return render(request,'forUsers/track.html')
 
+
+
+from django.core.mail import send_mail
+from django.conf import settings
 def request(request):
     collection = db['quests']
     if request.method == 'POST':
@@ -135,9 +144,26 @@ def request(request):
         "username": userData.get('userid'),
         "mailId": userData.get('useremail'),
         "type":userData.get("retype"),
-        "titel": userData.get('titelre'),
+        "title": userData.get('titelre'),
         "comment": userData.get('recomment')
         }
+        
+        query = {"username": userData.get('userid')}
+        user_exists = collection.find({ "user": "pruthu" }, { "name": 1, "_id": 0 })
+        # print(user_exists)
+        message = f"Dear {userData.get('')},\n thank you for the response on,\n {userData.get('recomment')} \n we have started work on it."
+        
+        if user_exists is not None:
+            send_mail(
+                'Received ' + userData.get("retype"),
+                message,
+                settings.EMAIL_HOST_USER,
+                [userData.get('useremail')],
+            )
+        
+        
+        
+        
         
         print(data)
         result = collection.insert_one(data)

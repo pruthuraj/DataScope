@@ -51,7 +51,7 @@
         <div class="title">
           <div class="row">
             <div class="col-md-offset-1 col-md-6">
-              <h1 id="back">Scope</h1>
+              <h1 id="back">Mine</h1>
             </div>
           </div>
         </div>
@@ -95,10 +95,10 @@
               {% csrf_token %}
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon3">product id</span>
+                  <span class="input-group-text" id="basic-addon3">product url</span>
                 </div>
                 <input type="text" class="form-control bg-dark text-white" name="product_id" id="basic-url" 
-                 minlength="10" maxlength="10"
+                 minlength="10" 
                  {% if pid %}
                  value={{pid}}
                  {% endif %}
@@ -112,17 +112,17 @@
           <div class="row" id="hint">
             <div class="text-editor">
               <code style="background-color: none;">
-                <span class="white">example on how to get id </span>
+                <span class="white">example on how to get url </span>
                 <br>
                 <span class="white">here is the link the highlighted one is </span>
-                <span class="orange">product id</span>
-                <br>
-                https://www.amazon.in/dp/<span class="orange">B0CHM729GT</span>/ref=
+                <span class="orange">product url</span>
+                <br><span class="orange">
+                https://www.amazon.in/dp/B0CHM729GT/ref=
                 sspa_dk_detail_3?pd_rd_i=B0CHM729GT&pd_rd_w=
                 rxnzG&content-id=amzn1.sym.cfb442af-d763-47b6-9176-863585ada839&
                 pf_rd_p=cfb442af-d763-47b6-9176-863585ada839&pf_rd_r=PRH20W7QT4RHTVGW1NGW&
                 pd_rd_wg=6CTLy&pd_rd_r=22793b98-e86c-45b1-8041-2bb84a5efd16&sp_csd=
-                d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&th=1 <br>
+                d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&th=1 </span><br>
                 <span class="white">next enter it in the mine field </span>
               </code>
             </div>

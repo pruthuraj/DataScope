@@ -15,7 +15,8 @@ body{
 
 .logo{
     width: 100px;
-    padding: 1.4rem 0;
+    height: 20px;
+    object-fit: cover;
 }
 
 header{

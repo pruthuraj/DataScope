@@ -70,7 +70,7 @@ def mineUserProduct(product_id):
         #--------------------------------
         #----      code to check min length of list 
         #----------------------------------------------------------------
-
+        # names_list = list(set(names_list))
         min_len = min_length_of_lists(
             names_list,
             review_titles_list,

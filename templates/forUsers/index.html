@@ -11,7 +11,11 @@
   <link rel="stylesheet" href="/static/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../static/css/styleHome.css">
   <link rel="stylesheet" href="../../static/css/inputSearch.css">
-  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <style>
+    code{
+      background-color: #222;
+    }
+  </style>
 </head>
 
 <body>
@@ -305,25 +309,14 @@
                 <!-- sect1 -->
                 <h2 class="heading">Track</h2>
                 <p style="font-weight: lighter;">
-                  If you want to sort your elements properly in the Z space,
-                  you can use the <br><kbd>data-rellax-zindex</kbd> property.
+                  The feature enables users to <kbd>monitor the prices</kbd>  of products 
+                  they are interested in and receive notifications when there are changes,
+                  such as price drops or increases. This feature empowers users to 
+                  make informed purchasing decisions and take advantage of favorable pricing opportunities..
                 </p>
                 <br>
 
-                <div class="text-editor">
-                  <code>
-                        &lt;div <span class="purple">class</span>="<span class="green">rellax</span>"&gt;<br>
-                        <span class="white">&nbsp;&nbsp;I’m that default chill speed of "-2" and default &nbsp;&nbsp;z-index of 0</span><br>
-                        &lt;/div&gt;
-                        <br />
-                        <br>
-                        &lt;div <span class="purple">class</span>="<span class="green">rellax</span>" <span class="purple">data-rellax-speed</span>="<span class="green">7</span>"
-                        <br>&nbsp;&nbsp;<span class="purple">data-rellax-zindex</span>="<span class="green">5</span>"&gt;<br>
-                        <span class="white">&nbsp;&nbsp;I’m super fast!! And on top of the previous &nbsp;&nbsp;element, I'm z-index 5!!</span><br>
-                        &lt;/div&gt;
-                        <br />
-                      </code>
-                </div>
+                
               </div>
             </section>
 
@@ -333,30 +326,14 @@
                 <!-- sect1 -->
                 <h2 class="heading">Request</h2>
                 <p style="font-weight: lighter;">
-                  Horizontal parallax is disabled by default. You can enable it by passing
-                  <br><kbd><span class="orange">horizontal: true</span></kbd> in the settings
-                  block. This feature is intended for panoramic style websites, where users
-                  scroll horizontally instead of vertically. Note that this can work together
-                  at the same time with the default vertical parallax. If you do not want this,
-                  pass <kbd><span class="orange">vertical: false</span></kbd>.
+                  The request feature enables users to submit requests, inquiries, complaints,
+                   or feedback directly to service providers through the platform. 
+                   This feature acts as a bridge <kbd>between users and service providers</kbd>,
+                   facilitating seamless communication and improving overall customer experience.
                 </p>
                 <br>
 
-                <div class="text-editor">
-                  <code>
-                        &lt;script&gt;
-                          <br>&nbsp;&nbsp;<span class="comment">//Enable Horizontal Parallax Scrolling</span>
-                          <br>&nbsp;&nbsp;<span class="purple">var</span> rellax = <span class="green">new</span> <span class="white">Rellax</span>('.rellax',
-                          <span class="white">
-                            {<br>
-                              &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">horizontal:</span><span class="orange">true</span>
-                              <br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//Disable vertical Parallax Scrolling</span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;<span class="green">vertical:</span><span class="orange">false</span>
-                            <br>&nbsp;&nbsp;}</span>);
-                          <br />
-                        &lt;/script&gt;
-                      </code>
-                </div>
+                
 
               </div>
             </section>
@@ -412,7 +389,8 @@
   </main>
 
   <!-- javascript -->
-  <script src="/static/js/auth/checkauth.js"></script>
+  <!-- <script src="/static/js/auth/checkauth.js"></script> -->
+  <script src="/static/js/auth/deauth.js"></script>
   <script type="text/javascript" src="/static/js/rellax.js"></script>
   <script type="text/javascript" src="/static/js/option.js"></script>
   <script>
