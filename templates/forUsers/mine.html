@@ -94,6 +94,9 @@
             <form action="{% url 'btnmine'%}" method="post">
               {% csrf_token %}
               <div class="input-group mb-3">
+                {% if error %}
+                  {{error}}
+                {% endif %}
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon3">product url</span>
                 </div>

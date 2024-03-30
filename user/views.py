@@ -64,6 +64,8 @@ def mindata(request):
         print(request.method) 
         
         product_id = request.POST.get("product_id")
+        if 'www.amazon.in' not in product_id:
+            return render(request, 'forUsers/minedata.html',{'error':'not an amazon url'})
         product_id = product_id.split("/dp/")[-1].split("/")[0]
         print(product_id)
         df = mineUserProduct(product_id).drop_duplicates()
