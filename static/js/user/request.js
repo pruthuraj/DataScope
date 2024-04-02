@@ -56,3 +56,8 @@ subBtn.addEventListener("submit",e =>{
       })
   })()
 
+  var back = document.getElementById("back");
+
+  back.addEventListener("click",e =>{
+      window.location.href = "http://127.0.0.1:8080/home/?username=pruthu&password=pruthu";
+  })
