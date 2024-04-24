@@ -35,7 +35,7 @@ def createUser(request):
         "first name": userData.get('fname'),
         "last name": userData.get('lname'),
         "email": userData.get('email'),
-        "number": int(userData.get('num')),
+        "number": userData.get('num'),
         "gender": userData.get('gender'),
         "DOB": userData.get('bdate'),
         "username": userData.get('usid'),

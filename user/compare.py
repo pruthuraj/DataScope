@@ -81,10 +81,20 @@ def properCompare(product):
     link = []
     
     for card in soup.find_all('div', class_='sh-dgr__content'):
+        if card.find('span',class_='OFFNJ') is None:
+            continue
+        
         price.append(card.find('span',class_='OFFNJ').text)  
         link.append(card.find('a',class_='xCpuod')['href'])
-        name.append(card.find('h3',class_='tAxDx').text)
-        site.append(card.find('div',class_='aULzUe').text)
+        
+        if card.find('h3',class_='tAxDx') is not None:
+            name.append(card.find('h3',class_='tAxDx').text)
+        else:
+            name.append("")
+        if card.find('div',class_='aULzUe') is not None:
+            site.append(card.find('div',class_='aULzUe').text)
+        else:
+            name.append("")
         image.append(card.find('div',class_='ArOc1c').find('img')['src'])
 
     links = [href_value.replace('/url?url=', '') for href_value in link]
