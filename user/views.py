@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse 
 from .datamine import mineUserProduct 
 from .compare import properCompare
+from .trackProduct import trackProduct
 from pymongo import MongoClient
 import pandas as df
 
 
 client = MongoClient('mongodb+srv://pruthu:pruthurajdata@atlascluster.ppge8u6.mongodb.net/')
 db = client['UserDatabase']
+email = ''
 
 # Create your views here.
 def home(request):
@@ -25,10 +27,15 @@ def home(request):
             
         
         query = {"username": username}
-        user_exists = collection.find_one(query) is not None
+        user_exists = collection.find_one(query) 
+        user_existsBool = collection.find_one(query) is not None
+        
+        global email
+        email = user_exists.get('email')
+        
         
         #check if user exist
-        if user_exists:
+        if user_existsBool:
             
             query = {"username": username, "password": password}
             user_exists = collection.find_one(query) is not None
@@ -126,11 +133,56 @@ def forUsersCompare(request):
     print('-------------------------------------------------')
     return render(request,'forUsers/compareProduct.html',{'data': df.to_dict('records'),'title':product})
 
-def createTrack(request):
-    return render(request,'forUsers/createTrack.html')
+# def createTrack(request):
+#     return render(request,'forUsers/createTrack.html')
 
 def track(request):
-    return render(request,'forUsers/track.html')
+    print('--------------------------------Track')
+    print(request.method)
+    collection = db['trackProducts']
+    global email
+    
+    
+    if request.method == 'POST':
+        userData = request.POST.dict()
+        product = request.POST.get('purl')
+        if 'www.amazon.in' not in userData.get('purl'):
+            return render(request,'forUsers/track.html',{'error':'not an amazon product'})
+        product_id = product.split("/dp/")[-1].split("/")[0]
+        
+        
+        p = trackProduct(product_id)
+        data = {
+            "emailId": email,
+            "product": p.get('name'),
+            "productID":product_id,
+            "Price": p.get('price'),
+            "imgUrl": p.get('imgUrl'),
+            "link": userData.get('purl'),
+        }
+        
+        #add product to track
+        result = collection.insert_one(data)
+        
+        #get track information for user
+        query = {"emailId": email}
+        userProduct = collection.find(query)
+        print(userProduct)
+        return render(request,'forUsers/track.html',{'data':userProduct})
+    if request.method == 'GET':
+        
+        #get track information for user
+        print(email)
+        query = {"emailId": email}
+        userProduct = collection.find(query)
+        print(userProduct)
+        
+        
+        
+        return render(request,'forUsers/track.html',{'data':userProduct})
+    else:
+        return render(request,'forUsers/track.html')
+        
 
 
 
