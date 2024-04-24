@@ -165,9 +165,18 @@ def track(request):
         result = collection.insert_one(data)
         
         #get track information for user
-        query = {"emailId": email}
+        query = collection.find({
+            "emailId": { 
+                "$eq": email, 
+                "$ne": None, 
+                "$ne": "" 
+            }
+        })
         userProduct = collection.find(query)
         print(userProduct)
+        
+        
+        
         return render(request,'forUsers/track.html',{'data':userProduct})
     if request.method == 'GET':
         
@@ -203,7 +212,7 @@ def request(request):
         }
         
         query = {"username": userData.get('userid')}
-        user_exists = collection.find({ "user": "pruthu" }, { "name": 1, "_id": 0 })
+        user_exists = collection.find({ "username":userData.get('userid')})
         # print(user_exists)
         message = f"Dear {userData.get('')},\n thank you for the response on,\n {userData.get('recomment')} \n we have started work on it."
         

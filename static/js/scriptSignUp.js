@@ -14,18 +14,22 @@ let current = 1;
 
 // get values for their 
 
+
+
+
+
+var fname = document.getElementById("fname");
+var lname = document.getElementById("lname");
+var email = document.signform.email;
+var phnumber = document.signform.num;
 var gender = document.signform.gender;
-gender = gender.options[gender.selectedIndex].text;
+var genderval = gender.options[gender.selectedIndex].text;
 var bdate = document.signform.bdate;
 
 
-
-
 nextBtnFirst.addEventListener("click", function(event){
-  var fname = document.getElementById("fname");
-  var lname = document.getElementById("lname");
 
-  let pattern = /^[a-zA-Z]+$/;
+  let pattern = '^[a-zA-Z]+$';
 
     // Check if input matches pattern
     if(fname.value.match(pattern) || lname.value.match(pattern)) {
@@ -64,8 +68,6 @@ nextBtnFirst.addEventListener("click", function(event){
 });
 
 nextBtnSec.addEventListener("click", function(event){
-  var email = document.signform.email;
-  var phnumber = document.signform.num;
 
   if(
     (email.value == '') 
@@ -95,24 +97,6 @@ nextBtnSec.addEventListener("click", function(event){
   current += 1;
 });
 
-nextBtnThird.addEventListener("click", function(event){
-  var bdate = document.signform.bdate;
-  if(bdate.value == ''){
-    alert("select your birthday")
-    return
-  }
-
-  event.preventDefault();
-  slidePage.style.marginLeft = "-75%";
-  bullet[current - 1].classList.add("active");
-  progressCheck[current - 1].classList.add("active");
-  progressText[current - 1].classList.add("active");
-  current += 1;
-});
-
-
-
-
 submitBtn.addEventListener("click", function(){
   var username = document.signform.usid;
   var password = document.signform.pass;
@@ -124,8 +108,8 @@ submitBtn.addEventListener("click", function(){
 
   // Check if input matches pattern
   if(password.value.match(pattern)) {
-      alert('Valid password');
-      submitBtn.disabled = true;
+      console.log('Valid password');
+      // submitBtn.disabled = true;
   } else {
       alert('Invalid password');
       submitBtn.disabled = false;
@@ -133,11 +117,26 @@ submitBtn.addEventListener("click", function(){
   }
 
 
+
+
+  data = {
+    "first name": userData.get('fname'),
+    "last name": userData.get('lname'),
+    "email": userData.get('email'),
+    "number": userData.get('num'),
+    "gender": userData.get('gender'),
+    "DOB": userData.get('bdate'),
+    "username": userData.get('usid'),
+    "password": userData.get('pass')
+  }
+
   bullet[current - 1].classList.add("active");
   progressCheck[current - 1].classList.add("active");
   progressText[current - 1].classList.add("active");
   current += 1;
   submitBtn.disabled = true;
+  window.location.href = 'http://127.0.0.1:8080/createuser/?fname='+fname.value+'&lname='+lname.value+'&email='+email.value+'&num='+phnumber+'&gender='+genderval+'&bdate='+bdate.value+'&usid= '+username.value+'&pass='+password.value;
+
 });
 
 prevBtnSec.addEventListener("click", function(event){
@@ -165,3 +164,13 @@ prevBtnFourth.addEventListener("click", function(event){
   current -= 1;
 });
 
+
+nextBtnThird.addEventListener("click", function(event){
+ 
+  event.preventDefault();
+  slidePage.style.marginLeft = "-75%";
+  bullet[current - 1].classList.add("active");
+  progressCheck[current - 1].classList.add("active");
+  progressText[current - 1].classList.add("active");
+  current += 1;
+});

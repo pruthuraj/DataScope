@@ -82,8 +82,6 @@ compare.addEventListener("click",e =>{
         alert("enter product")
         return
     }else{
-        getElementById('bo').style.display = 'contents';
-        compare.disabled = true;
         resume()
     }
 })
