@@ -25,6 +25,16 @@ nextBtnFirst.addEventListener("click", function(event){
   var fname = document.getElementById("fname");
   var lname = document.getElementById("lname");
 
+  let pattern = /^[a-zA-Z]+$/;
+
+    // Check if input matches pattern
+    if(fname.value.match(pattern) || lname.value.match(pattern)) {
+        console.log('Valid first name');
+    } else {
+        alert('Invalid first name');
+        return
+    }
+
   if(
     (fname.value == '') 
     &&
@@ -100,12 +110,28 @@ nextBtnThird.addEventListener("click", function(event){
   current += 1;
 });
 
+
+
+
 submitBtn.addEventListener("click", function(){
   var username = document.signform.usid;
   var password = document.signform.pass;
   if(username.value == '' || password.value ==''){
     return
   }
+
+  let pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+  // Check if input matches pattern
+  if(password.value.match(pattern)) {
+      alert('Valid password');
+      submitBtn.disabled = true;
+  } else {
+      alert('Invalid password');
+      submitBtn.disabled = false;
+      return
+  }
+
 
   bullet[current - 1].classList.add("active");
   progressCheck[current - 1].classList.add("active");

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mine Data</title>
+  <title>track product</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,14 +83,57 @@
     </header>
 
     <div class="container mt-5">
-      
+      <div id="addproduct">
+        <div class="bg-dark p-3">
+          <form action="{% url 'track'%}" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">product url</span>
+              </div>
+              <input type="url" class="form-control bg-dark text-white" name="purl" id="purl" required>
+                
+              <button class="btn btn-light text-dark" type="submit" id="mineBtn">Mine</button>
+              
+            </div>
+            <div class="text-danger">
+              {% if error %}
+                {{error}}
+              {% endif %}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="product mt-5">
+        <div class="container mt-5">
+          <div class="row mt-5">
+            {% for row in data %}
+            <div class="card p-2 m-1" style="width: 18rem;">
+              <div class="card-body text-center">
+                <h5 class="card-title text-dark">{{row.product}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted text-success">&#8377; {{row.Price}}</h6>
+                <h5 class="card-title text-dark">  {{row.productID}}</h5>
+                
+                <a href="{{row.link}}">
+                  <button class="btn btn-outline-info">check</button>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
   </main>
-  <script src="/static/js/auth/checkauth.js"></script>
+  <!-- <script src="/static/js/auth/checkauth.js"></script> -->
   <script src="/static/js/jquery-1.11.0.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
-
-  <script src="/static/js/user/request.js"></script>
+  
+  <script src="/static/js/user/track.js"></script>
 
 </body>
 

@@ -4,17 +4,23 @@ var colorOnMouseLeave = ['#333333','#76ABAE','#3f3f3f','#f3f3f3'];
 var ParticlesColor = colorOnMouseLeave;
 var brake = document.getElementById("basic-url")
 var compare = document.getElementById("comparebtn");
+
+var retrievedData = null
+var retrievedPassword = null
 back.addEventListener("click",e =>{
-    window.location.href = "http://127.0.0.1:8080/home/?username=pruthu&password=pruthu";
+    window.location.href = "http://127.0.0.1:8080/home/?username="+retrievedData+"&password="+retrievedPassword;
 })
+
+
+
 var particles = null;
 
 
 
 window.onload = function(){
     
-    var retrievedData = localStorage.getItem('user');
-    var retrievedPassword = localStorage.getItem('password');
+     retrievedData = localStorage.getItem('user');
+     retrievedPassword = localStorage.getItem('password');
     if ( retrievedData == null || retrievedData == 'null' || retrievedData == '') {
         window.location.href = 'http://127.0.0.1:8080/login';
     }else{
