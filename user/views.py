@@ -1,56 +1,48 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse 
-from .datamine import mineUserProduct 
+from .datamine import scrape_product_reviews
 from .compare import properCompare
 from .trackProduct import trackProduct
+from .compareTrack import comparetrackProduct
 from pymongo import MongoClient
 import pandas as df
 
 
-client = MongoClient('mongodb+srv://pruthu:pruthurajdata@atlascluster.ppge8u6.mongodb.net/')
+client = MongoClient('mongodb://localhost:27017/')
 db = client['UserDatabase']
 email = ''
 
 # Create your views here.
+from django.contrib.auth.hashers import check_password
+
 def home(request):
     collection = db['user']
     
-    if request.method == 'GET':
+    if request.method == 'POST':
         
-        username = request.GET.get('username')
-        password = request.GET.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         
         print(username, password)
         
-        if username is None and password is None:
-            return render(request, 'login.html', {'error_message': 'please login first'})
+        if not username or not password:
+            return render(request, 'login.html', {'error_message': 'Please provide both username and password'})
             
         
         query = {"username": username}
-        user_exists = collection.find_one(query) 
-        user_existsBool = collection.find_one(query) is not None
+        user_data = collection.find_one(query) 
         
-        global email
-        email = user_exists.get('email')
-        
-        
-        #check if user exist
-        if user_existsBool:
-            
-            query = {"username": username, "password": password}
-            user_exists = collection.find_one(query) is not None
-            
-            # check if password is correct
-            if user_exists:
-                print("User with provided username and password exists.")
-                return render(request,'forUsers/index.html',{'username':username})
-            else:
-                print("User with provided username and password does not exist.")
-                return render(request, 'login.html', {'error_message': 'Invalid password'})
+        if user_data and check_password(password, user_data.get('password')):
+            print("User with provided username and password exists.")
+            request.session['username'] = user_data.get('username')
+            request.session['email'] = user_data.get('email')
+            return render(request,'forUsers/index.html',{'username':username})
         else:
-            # User doesn't exist or provided incorrect credentials
-            return render(request, 'login.html', {'error_message': 'user does not exist'})
-    return HttpResponse('user not found')
+            print("User with provided username and password does not exist.")
+            return render(request, 'login.html', {'error_message': 'Invalid username or password'})
+    
+    # If GET request, just render the login page
+    return render(request, 'login.html')
 
 
 
@@ -70,19 +62,22 @@ def mindata(request):
     if request.method == 'POST':
         print(request.method) 
         
-        product_id = request.POST.get("product_id")
-        if 'www.amazon.in' not in product_id:
+        product_id_url = request.POST.get("product_id")
+        if 'www.amazon.in' not in product_id_url:
             return render(request, 'forUsers/minedata.html',{'error':'not an amazon url'})
-        product_id = product_id.split("/dp/")[-1].split("/")[0]
-        print(product_id)
-        df = mineUserProduct(product_id).drop_duplicates()
         
-        #if no such id found
-        if type(df) == str:
-            print(df)
-            return redirect('mine',{'username':product_id,'error':f"no such {product_id} found"})
-        else:            
-            return render(request, 'forUsers/minedata.html', {'data': df.to_dict('records')})
+        product_id = product_id_url.split("/dp/")[-1].split("/")[0]
+        print(product_id)
+        
+        df = scrape_product_reviews(product_id)
+        
+        if df is None:
+            print("Failed to scrape reviews.")
+            return redirect('mine',{'username':product_id,'error':f"Could not find reviews for {product_id}"})
+        
+        df = df.drop_duplicates()
+                    
+        return render(request, 'forUsers/minedata.html', {'data': df.to_dict('records')})
     else:
         # Handle other request methods like GET
         return render(request,'forUsers/mine.html',{'pid':product_id,'error':f"no such {product_id} found"})
@@ -119,74 +114,79 @@ def downloadfile(request, file):
 def compare(request):
     return render(request,'forUsers/compare.html')
 
+from .compare import scrape_google_shopping
+
 def forUsersCompare(request):
     print('----------------------------------compare')
     print(request.method)
     product=''
+    data = []
     if request.method == 'GET':
         print(request.method) 
         
         product = request.GET.get("product")
 
-        print(product)
-        df = properCompare(product)
+        if product:
+            print(product)
+            df = scrape_google_shopping(product)
+            if df is not None:
+                data = df.to_dict('records')
+
     print('-------------------------------------------------')
-    return render(request,'forUsers/compareProduct.html',{'data': df.to_dict('records'),'title':product})
+    return render(request,'forUsers/compareProduct.html',{'data': data,'title':product})
 
 # def createTrack(request):
 #     return render(request,'forUsers/createTrack.html')
+
+
+from .trackProduct import scrape_amazon_product
 
 def track(request):
     print('--------------------------------Track')
     print(request.method)
     collection = db['trackProducts']
-    global email
+    email = request.session.get('email')
+
+    if not email:
+        return redirect('login')
     
     
     if request.method == 'POST':
         userData = request.POST.dict()
-        product = request.POST.get('purl')
-        if 'www.amazon.in' not in userData.get('purl'):
+        product_url = request.POST.get('purl')
+        if 'www.amazon.in' not in product_url:
             return render(request,'forUsers/track.html',{'error':'not an amazon product'})
-        product_id = product.split("/dp/")[-1].split("/")[0]
+        
+        product_id = product_url.split("/dp/")[-1].split("/")[0]
         
         
-        p = trackProduct(product_id)
+        scraped_data = scrape_amazon_product(product_id)
+
+        if not scraped_data:
+            return render(request, 'forUsers/track.html', {'error': 'Could not retrieve product data. Please check the URL.'})
+
         data = {
             "emailId": email,
-            "product": p.get('name'),
-            "productID":product_id,
-            "Price": p.get('price'),
-            "imgUrl": p.get('imgUrl'),
-            "link": userData.get('purl'),
+            "product": scraped_data.get('name'),
+            "productID": product_id,
+            "Price": scraped_data.get('price'),
+            "imgUrl": scraped_data.get('imgUrl'),
+            "link": product_url,
         }
         
         #add product to track
         result = collection.insert_one(data)
         
         #get track information for user
-        query = collection.find({
-            "emailId": { 
-                "$eq": email, 
-                "$ne": None, 
-                "$ne": "" 
-            }
-        })
-        userProduct = collection.find(query)
-        print(userProduct)
-        
-        
-        
-        return render(request,'forUsers/track.html',{'data':userProduct})
-    if request.method == 'GET':
-        
-        #get track information for user
-        print(email)
         query = {"emailId": email}
         userProduct = collection.find(query)
-        print(userProduct)
         
-        
+        return render(request,'forUsers/track.html',{'data':userProduct})
+    
+    if request.method == 'GET':
+        #get track information for user
+        query = {"emailId": email}
+        userProduct = collection.find(query)
         
         return render(request,'forUsers/track.html',{'data':userProduct})
     else:
