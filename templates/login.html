@@ -14,7 +14,8 @@
 {% block body %}
 <div class="container">
 	<div class="login-content">
-		<form action="/home" method="get">
+		<form action="/home/" method="post">
+			{% csrf_token %}
 			<img src="/static/img/avatar.svg">
 			<h2 class="title">Welcome</h2>
 			   <div class="input-div one">
@@ -24,7 +25,7 @@
 				  <div class="div">
 						  <h5>Username</h5>
 						  <input type="text" class="input" name="username" id="username" required
-						  {% if password %}
+						  {% if username %}
 							value='{{username}}'
 							{% endif %}
 						  >
@@ -36,16 +37,14 @@
 				  </div>
 				  <div class="div">
 					   <h5>Password</h5>
-					   <input type="password" class="input" name="password" id="password" required
-					 	{% if password %}
-						value='{{password}}'
-						{% endif %}
-					   >
+					   <input type="password" class="input" name="password" id="password" required>
 			   </div>
 			</div>
 			<div class="text-danger">
 				{% if error_message %}
 					{{error_message}}
+				{% elif success_message %}
+					<span class="text-success">{{ success_message }}</span>
 				{% endif %}
 			</div>
 			<a href="/forgotpassword">Forgot Password?</a>

@@ -7,7 +7,8 @@ import random
 
 
 #database connection
-client = MongoClient('mongodb+srv://pruthu:pruthurajdata@atlascluster.ppge8u6.mongodb.net/')
+client = MongoClient('mongodb://localhost:27017/')
+
 db = client['UserDatabase']
 
 
@@ -39,7 +40,7 @@ def createUser(request):
         "gender": userData.get('gender'),
         "DOB": userData.get('bdate'),
         "username": userData.get('usid'),
-        "password": userData.get('pass')
+        "password": make_password(userData.get('pass'))
     }
     
     print(data)
@@ -48,7 +49,7 @@ def createUser(request):
     user_exists = collection.find_one(query) is not None
     
     if user_exists:
-        return HttpResponse("user already exit")
+        return HttpResponse("user already exist")
     
     # Insert data into collection
     result = collection.insert_one(data)
@@ -57,7 +58,7 @@ def createUser(request):
         print("data inserted successfully")
         return render(request,'login.html',{
             'username':userData.get('usid'),
-            'password':userData.get('pass')
+            'success_message': 'Registration successful! Please log in.'
             })
     else:
         return HttpResponse("Failed to insert data.")
@@ -90,16 +91,15 @@ def forgotPassword(request):
         
         user_exists = collection.find_one(query) is not None
         
-        if user_exists is None:
+        if not user_exists:
             print("user doesnot exist")
             return render(request,'forgotPassword.html',{'error':"User does not exist"})
         else:
             print("user exist")
 
-            global changePasswordForEmail
-            changePasswordForEmail = userData.get('email')
-            global otp 
+            request.session['reset_email'] = userData.get('email')
             otp = random.randint(1000, 9999)
+            request.session['reset_otp'] = otp
             message = "your otp is " + str(otp) + " and don't share it with anyone else."
             send_mail(
                 'OTP ',
@@ -112,36 +112,50 @@ def forgotPassword(request):
         return render(request,'forgotPassword.html')
 
 
+from django.contrib.auth.hashers import make_password
+
 @csrf_protect
 def passwordOTP(request):
     print("passwordOTP")
     collection = db['user']
-    global changePasswordForEmail
     
     if request.method == 'GET':   
         userData = request.GET.dict()
         
-        global otp 
+        otp = request.session.get('reset_otp')
         uotp = ''
         
-        uotp = userData.get('ot1')
-        uotp += userData.get('ot2')
-        uotp += userData.get('ot3')
-        uotp += userData.get('ot4')
+        uotp = userData.get('ot1', '')
+        uotp += userData.get('ot2', '')
+        uotp += userData.get('ot3', '')
+        uotp += userData.get('ot4', '')
         
         print(uotp + " " + str(otp))
-        if int(uotp) == int(otp):
-            print("otp verified")
-            otp = ''
-            return render(request,'resetPassword.html')
-        else:
-            return render(request,'passwordOTP.html',{'error':"OTP does not match"})
+        try:
+            if int(uotp) == int(otp):
+                print("otp verified")
+                request.session['reset_otp'] = None
+                return render(request,'resetPassword.html')
+            else:
+                return render(request,'passwordOTP.html',{'error':"OTP does not match"})
+        except (ValueError, TypeError):
+            return render(request,'passwordOTP.html',{'error':"Invalid OTP format"})
+
         
     if request.method == 'POST':
+        changePasswordForEmail = request.session.get('reset_email')
+        if not changePasswordForEmail:
+            return redirect('login') # Or some error page
+
         print(request.method + " " + changePasswordForEmail)
         userData = request.POST.dict()
-        collection.update_one({'email': changePasswordForEmail}, {'$set': {'password': userData.get('password')}})
-        changePasswordForEmail = ''
+        hashed_password = make_password(userData.get('password'))
+        collection.update_one({'email': changePasswordForEmail}, {'$set': {'password': hashed_password}})
+        
+        # Clear session data
+        request.session['reset_email'] = None
+        request.session['reset_otp'] = None
+
         return redirect('login')
     else:
         return render(request,'passwordOTP.html')
