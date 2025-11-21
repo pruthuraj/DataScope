@@ -26,7 +26,7 @@ def scrape_amazon_product(product_id: str) -> dict | None:
         print(f"Error fetching product page: {e}")
         return None
 
-    soup = bs(response.content, 'html.parser')
+    soup = bs(response.text, 'html.parser')
     
     data = {'name': None, 'price': None, 'imgUrl': None}
 
@@ -57,7 +57,7 @@ def scrape_amazon_product(product_id: str) -> dict | None:
             # Remove commas and currency symbols, then convert to float
             cleaned_price = re.sub(r'[^\d.]', '', price_text)
             if cleaned_price:
-                data['price'] = float(cleaned_price)
+                data['price'] = float(cleaned_price) # type: ignore
     except (AttributeError, ValueError):
         print("Could not parse product price.")
 
